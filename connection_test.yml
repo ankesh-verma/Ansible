@@ -1,0 +1,7 @@
+---
+ - name: Check Connection from Master node
+   hosts: all
+   gather_facts: true
+   tasks:
+     - name: Ping Test
+       ping
