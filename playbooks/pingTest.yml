@@ -1,0 +1,7 @@
+---
+ - name: Playbook to check connectivity 
+   hosts: all
+   gather_facts: False
+   tasks:
+     - name: Check Remote Target Connection..
+       ping:
