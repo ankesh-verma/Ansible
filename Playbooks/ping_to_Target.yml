@@ -1,7 +1,19 @@
 ---
- - name: Playbook to check Connectivity from Master to Traget Node
-   hosts: all
-   gather_facts: false
-   tasks:
-     - name: Check Connection
-       ping:
+- name: Playbook to check connectivity from control node to target nodes
+  description: Validates SSH connectivity and Ansible communication with all managed hosts
+  hosts: all
+  gather_facts: true 
+  tasks:
+    - name: Check connection to target node
+      ping:
+      register: ping_result
+
+    - name: Display connectivity status
+      debug:
+        msg: "Successfully connected to {{ ansible_facts.hostname }}"
+      when: ping_result is succeeded
+
+    - name: Fail if connectivity check fails
+      fail:
+        msg: "Failed to connect to {{ ansible_facts.hostname }}"
+      when: ping_result is failed
