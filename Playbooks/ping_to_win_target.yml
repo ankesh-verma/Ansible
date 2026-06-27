@@ -1,0 +1,9 @@
+---
+- name: Check connectivity from Ansible controller to Windows control node
+  hosts: windows
+  gather_facts: no
+  vars:
+    ansible_connection: winrm
+  tasks:
+    - name: Test connectivity with win_ping
+      win_ping:
